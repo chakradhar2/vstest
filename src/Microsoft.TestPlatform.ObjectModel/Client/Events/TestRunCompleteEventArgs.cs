@@ -16,6 +16,26 @@ namespace Microsoft.VisualStudio.TestPlatform.ObjectModel.Client
     [DataContract]
     public class TestRunCompleteEventArgs : EventArgs
     {
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="stats">The final stats for the test run. This parameter is only set for communications between vstest.discoveryengine and vstest.discoveryengine clients (like VS)</param>
+        /// <param name="isAborted">Specifies whether the test run is aborted.</param>
+        /// <param name="isCanceled">Specifies whether the test run is canceled.</param>
+        /// <param name="error">Specifies the error which occured during the execution of the test run.</param>
+        /// <param name="attachmentSets">Attachment sets associated with the run.</param>
+        /// <param name="elapsedTime">Time elapsed in just running tests</param>
+        public TestRunCompleteEventArgs(ITestRunStatistics stats, bool isCanceled, bool isAborted, Exception error, Collection<AttachmentSet> attachmentSets, TimeSpan elapsedTime)
+        {
+            TestRunStatistics = stats;
+            IsCanceled = isCanceled;
+            IsAborted = isAborted;
+            Error = error;
+            AttachmentSets = attachmentSets;
+            ElapsedTimeInRunningTests = elapsedTime;
+        }
+
         /// <summary>
         /// Default constructor.
         /// </summary>
